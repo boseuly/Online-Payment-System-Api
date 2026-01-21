@@ -37,4 +37,7 @@ out/
 .vscode/
 
 # 프로젝트 제외 경로
-/src/main/java/com/store/passmeby/PassMeByApi/dao/vo/
+#/src/main/java/com/store/passmeby/PassMeByApi/dao/vo/
+
+#yml
+*.yml
