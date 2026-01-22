@@ -38,7 +38,7 @@ public class LoginSuccessJWTProvideHandler extends SimpleUrlAuthenticationSucces
         log.info( "RefreshToken 을 발급합니다. RefreshToken: {}" ,refreshToken);
 
         // 여기서 리프레시 토큰 저장 필요
-        usersRepository.insertRefreshToken(refreshToken);
+        usersRepository.insertRefreshToken(refreshToken, email);
 
         response.getWriter().write("success");
     }

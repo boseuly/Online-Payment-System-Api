@@ -3,6 +3,7 @@ package com.store.passmeby.PassMeByApi.controller;
 import com.store.passmeby.PassMeByApi.dto.request.CustomerReqDto;
 import com.store.passmeby.PassMeByApi.dto.response.CommonDto;
 import com.store.passmeby.PassMeByApi.service.CustomerService;
+import com.store.passmeby.PassMeByApi.service.JwtServiceImpl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/customer")
 public class CustomerController {
     private final CustomerService customerService;
+    private final JwtServiceImpl jwtServiceImpl;
 
     /**
      * 회원가입
@@ -45,6 +47,20 @@ public class CustomerController {
         }
 
         return new ResponseEntity<>(CommonDto.ok(null, available), HttpStatus.OK);
+
+    }
+
+    /**
+     * 로그아웃
+     */
+    @PostMapping("/logout")
+    public ResponseEntity<CommonDto<?>> logout(@RequestHeader("Authorization") String authHeader) {
+        // Bearer {token} <- 이런 형식으로 옴
+        String token = authHeader.replace("Bearer ", "");
+        String email = jwtServiceImpl.extractEmail(token).orElseThrow();
+
+        jwtServiceImpl.destroyRefreshToken(email);
+        return new ResponseEntity<>(CommonDto.ok(), HttpStatus.OK);
 
     }
 

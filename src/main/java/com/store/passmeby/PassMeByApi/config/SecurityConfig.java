@@ -70,7 +70,6 @@ public class SecurityConfig {
 //						.loginPage("/login")
 //						.defaultSuccessUrl("/home"))
                 .logout((logout) -> logout
-                        .logoutSuccessUrl("/login")
                         .invalidateHttpSession(true))
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

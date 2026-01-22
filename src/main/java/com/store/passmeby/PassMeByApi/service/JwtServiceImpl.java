@@ -73,7 +73,7 @@ public class JwtServiceImpl implements JwtService {
         usersRepository.findByEmail(email)
                 .ifPresentOrElse(
                         users -> users.updateRefreshToken(refreshToken),
-                        () -> new Exception("회원 조회 실패")
+                        () -> { throw new RuntimeException("회원 조회 실패"); }
                 );
     }
 
@@ -81,8 +81,10 @@ public class JwtServiceImpl implements JwtService {
     public void destroyRefreshToken(String email) {
         usersRepository.findByEmail(email)
                 .ifPresentOrElse(
-                        users -> users.destroyRefreshToken(),
-                        () -> new Exception("회원 조회 실패")
+                        users -> { users.destroyRefreshToken();
+                            usersRepository.deleteRefreshToken(email);  // refreshToken 삭제
+                        },
+                        () -> { throw new RuntimeException("회원 조회 실패"); }
                 );
     }
 

@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.store.passmeby.PassMeByApi.dao.CustomerDao">
 
+
     <!--   그룹에 속한 파일 전체 조회  -->
     <select id="findByUsername" resultType="com.store.passmeby.PassMeByApi.dao.vo.Users">
         SELECT * FROM SYSTEM.TB_CUSTOMER
@@ -57,5 +58,13 @@
     <insert id="insertRefreshToken">
         update SYSTEM.TB_CUSTOMER
         set REFRESH_TOKEN = #{refreshToken}
+        where email = #{email}
     </insert>
+
+    <!-- refreshToken 삭제 -->
+    <delete id="deleteRefreshToken">
+        UPDATE SYSTEM.TB_CUSTOMER
+        SET REFRESH_TOKEN = NULL
+        WHERE EMAIL = #{email}
+    </delete>
 </mapper>

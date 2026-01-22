@@ -33,5 +33,11 @@ public interface CustomerDao {
     /**
      * refreshToken 저장
      */
-    void insertRefreshToken(@Param("refreshToken") String refreshToken);
+    void insertRefreshToken(@Param("refreshToken") String refreshToken,
+                            @Param("email") String email);
+
+    /**
+     * refreshToken 삭제
+     */
+    void deleteRefreshToken(@Param("refreshToken") String refreshToken);
 }
