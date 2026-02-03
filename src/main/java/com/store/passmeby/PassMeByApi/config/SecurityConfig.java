@@ -61,6 +61,7 @@ public class SecurityConfig {
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                         .requestMatchers( "/", "/index.html", "/favicon.ico", "/error").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/v1/customer/join/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/v1/customer/logout/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/v1/customer/join/**").permitAll()
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .anyRequest().authenticated()

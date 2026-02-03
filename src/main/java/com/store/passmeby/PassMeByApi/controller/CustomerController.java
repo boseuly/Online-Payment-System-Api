@@ -57,9 +57,11 @@ public class CustomerController {
     public ResponseEntity<CommonDto<?>> logout(@RequestHeader("Authorization") String authHeader) {
         // Bearer {token} <- 이런 형식으로 옴
         String token = authHeader.replace("Bearer ", "");
-        String email = jwtServiceImpl.extractEmail(token).orElseThrow();
+        String email = jwtServiceImpl.extractEmail(token).orElse(null);
 
-        jwtServiceImpl.destroyRefreshToken(email);
+        if (email != null) {
+            jwtServiceImpl.destroyRefreshToken(email);
+        }
         return new ResponseEntity<>(CommonDto.ok(), HttpStatus.OK);
 
     }

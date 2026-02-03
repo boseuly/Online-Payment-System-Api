@@ -39,5 +39,5 @@ public interface CustomerDao {
     /**
      * refreshToken 삭제
      */
-    void deleteRefreshToken(@Param("refreshToken") String refreshToken);
+    void deleteRefreshToken(@Param("email") String email);
 }
