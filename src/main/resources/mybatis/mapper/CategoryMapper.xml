@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.store.passmeby.PassMeByApi.dao.CategoryDao">
+    <select id="selectCategoryAll" resultType="com.store.passmeby.PassMeByApi.dao.vo.CategoryVo">
+        SELECT CATEGORY_CODE as categoryCode,
+               CATEGORY_NAME as categoryName,
+               CATEGORY_VALUE as categoryValue,
+               PARENT_CODE as parentCode,
+               SORT as sort,
+               USE_YN as useYn
+        FROM SYSTEM.TB_CATEGORY
+        WHERE USE_YN = 'Y'
+    </select>
+</mapper>

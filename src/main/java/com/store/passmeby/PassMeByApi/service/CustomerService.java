@@ -15,7 +15,6 @@ import java.util.Calendar;
 @RequiredArgsConstructor
 public class CustomerService {
 
-    // ModelMapperConfig 대신 작성
     private final CustomerDao customerDao;
     private final PasswordEncoder passwordEncoder;
 

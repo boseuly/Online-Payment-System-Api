@@ -59,12 +59,13 @@ public class SecurityConfig {
                 .formLogin(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-                        .requestMatchers( "/", "/index.html", "/favicon.ico", "/error").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/v1/customer/join/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/v1/customer/logout/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/v1/customer/join/**").permitAll()
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers( "/", "/index.html", "/favicon.ico",
+                                "/error", "/api/v1/customer/join/**",
+                                "/api/v1/customer/logout/**","/api/v1/**").permitAll()
+                        // 로그인 필요
+                        .requestMatchers("/api/v1/auth/**").authenticated()
+                        .anyRequest()
+                        .authenticated()
                 )
                 // 폼 로그인은 현재 사용하지 않음
 //				.formLogin(formLogin -> formLogin

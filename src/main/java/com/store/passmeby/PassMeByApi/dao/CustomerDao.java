@@ -29,7 +29,6 @@ public interface CustomerDao {
      */
     int insertCustomer(@Param("vo")CustomerVo vo);
 
-
     /**
      * refreshToken 저장
      */
