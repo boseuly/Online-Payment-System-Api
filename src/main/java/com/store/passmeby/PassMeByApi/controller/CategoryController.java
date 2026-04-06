@@ -8,9 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,9 +24,20 @@ public class CategoryController {
     /**
      * 카테고리 전체 조회
      */
-    @GetMapping("/")
+    @GetMapping("")
     public ResponseEntity<CommonDto<?>> getCategoryAll() {
         List<CategoryResDto> res = categoryService.selectCategoryAll();
+
+        return new ResponseEntity<>(CommonDto.ok(res), HttpStatus.OK);
+
+    }
+
+    /**
+     * 카테고리 단건 조회
+     */
+    @GetMapping("/{categoryCode}")
+    public ResponseEntity<CommonDto<?>> getCategoryByCategoryCode(@PathVariable(required = true) String categoryCode) {
+        CategoryResDto res = categoryService.selectCategoryByCategoryCode(categoryCode);
 
         return new ResponseEntity<>(CommonDto.ok(res), HttpStatus.OK);
 

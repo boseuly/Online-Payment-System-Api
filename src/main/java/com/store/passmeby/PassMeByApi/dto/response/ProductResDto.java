@@ -32,4 +32,12 @@ public class ProductResDto {
      * 상품 상세 이미지(임시 - 나중에 firebase storage 사용)
      */
     private String productImagePath;
+
+    /**
+     * 썸네일 경로
+     */
+    private String thumbnailPath;
+
+
 }
+

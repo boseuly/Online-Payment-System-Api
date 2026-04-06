@@ -10,10 +10,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -30,9 +27,20 @@ public class ProductController {
     /**
      * 상품 리스트 불러오기
      */
-    @GetMapping("/")
-    public ResponseEntity<CommonDto<?>> productList(@RequestBody ProductReqDto reqDto) {
-        List<ProductResDto> res = productService.getProductList(reqDto);
+    @GetMapping("")
+    public ResponseEntity<CommonDto<?>> productList(@RequestParam(defaultValue = "1") int currentPage,
+                                                    @RequestParam(defaultValue = "20") int pageSize,
+                                                    @RequestParam(required = false) String categoryCode) {
+        List<ProductResDto> res = productService.getProductList(currentPage, pageSize, categoryCode);
+        return new ResponseEntity<>(CommonDto.ok(res), HttpStatus.OK);
+    }
+
+    /**
+     * 상품 단건 불러오기
+     */
+    @GetMapping("/{productCode}")
+    public ResponseEntity<CommonDto<?>> productByProductCode(@PathVariable String productCode) {
+        ProductResDto res = productService.selectProductByProductCode(productCode);
         return new ResponseEntity<>(CommonDto.ok(res), HttpStatus.OK);
     }
 

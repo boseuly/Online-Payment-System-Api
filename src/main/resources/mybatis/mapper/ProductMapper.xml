@@ -14,14 +14,29 @@
 
     <!--  상품 리스트 조회  -->
     <select id="selectProductList" resultType="com.store.passmeby.PassMeByApi.dao.vo.ProductVo">
-        SELECT PRODUCT_CODE,
-               PRODUCT_NAME,
-               CATEGORY_CODE,
-               PRODUCT_PRIEC,
-               USE_YN
+        SELECT PRODUCT_CODE as productCode,
+               PRODUCT_NAME as productName,
+               CATEGORY_CODE as categoryCode,
+               PRODUCT_PRICE as productPrice,
+               THUMBNAIL_PATH as thumbnailPath,
+               USE_YN as useYn
         FROM SYSTEM.TB_PRODUCT
         WHERE USE_YN = 'Y'
         and category_code = #{search.categoryCode}
+        ORDER BY PRODUCT_CODE
         OFFSET #{search.startPage} ROWS FETCH FIRST #{search.pageSize} ROWS ONLY
+    </select>
+
+    <!--  상품 단건 조회  -->
+    <select id="selectProductByProductCode" resultType="com.store.passmeby.PassMeByApi.dao.vo.ProductVo">
+        SELECT PRODUCT_CODE as productCode,
+               PRODUCT_NAME as productName,
+               CATEGORY_CODE as categoryCode,
+               PRODUCT_PRICE as productPrice,
+               THUMBNAIL_PATH as thumbnailPath,
+               USE_YN as useYn
+        FROM SYSTEM.TB_PRODUCT
+        WHERE USE_YN = 'Y'
+          and PRODUCT_CODE = #{productCode}
     </select>
 </mapper>

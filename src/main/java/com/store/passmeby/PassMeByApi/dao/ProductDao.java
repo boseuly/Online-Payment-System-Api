@@ -13,4 +13,9 @@ public interface ProductDao {
      * 상품 리스트 조회
      */
     List<ProductVo> selectProductList(@Param("search") ProductVo.Search search);
+
+    /**
+     * 상품 단건 불러오기
+     */
+    ProductVo selectProductByProductCode(@Param("productCode") String productCode);
 }

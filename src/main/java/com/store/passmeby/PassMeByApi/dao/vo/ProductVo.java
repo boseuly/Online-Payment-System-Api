@@ -34,6 +34,11 @@ public class ProductVo {
      */
     private String productImagePath;
 
+    /**
+     * 썸네일 경로
+     */
+    private String thumbnailPath;
+
     private Search search;
 
     @Data

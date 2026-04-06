@@ -24,5 +24,10 @@ public class CategoryService {
         return voList.stream().map(vo -> modelMapper.map(vo, CategoryResDto.class)).toList();
     }
 
-
+    /**
+     * 카테고리 단건 조회
+     */
+    public CategoryResDto selectCategoryByCategoryCode(String categoryCode) {
+        return categoryDao.selectCategoryByCategoryCode(categoryCode);
+    }
 }

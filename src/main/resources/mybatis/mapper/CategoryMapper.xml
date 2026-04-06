@@ -11,4 +11,14 @@
         FROM SYSTEM.TB_CATEGORY
         WHERE USE_YN = 'Y'
     </select>
+    <select id="selectCategoryByCategoryCode" resultType="com.store.passmeby.PassMeByApi.dto.response.CategoryResDto">
+        SELECT CATEGORY_CODE as categoryCode,
+               CATEGORY_NAME as categoryName,
+               CATEGORY_VALUE as categoryValue,
+               PARENT_CODE as parentCode,
+               SORT as sort,
+               USE_YN as useYn
+        FROM SYSTEM.TB_CATEGORY
+        WHERE CATEGORY_CODE = #{categoryCode}
+    </select>
 </mapper>
